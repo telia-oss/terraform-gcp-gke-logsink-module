@@ -1,4 +1,4 @@
-# Terraform Google Cloud Logging Module for GKE/Anthos
+# Terraform Google Cloud Log Sink Module for GKE/Anthos Clusters
 
 This Terraform module is tailored for GKE (Google Kubernetes Engine) and Anthos clusters. It provisions a Google Cloud Logging bucket, creates a sink for collecting logs from a source project related to the cluster, and grants appropriate permissions for the logging bucket in the destination project.
 
@@ -6,7 +6,7 @@ This Terraform module is tailored for GKE (Google Kubernetes Engine) and Anthos 
 
 ```hcl
 module "gcp_logging" {
-  source              = "git::https://github.com/YOUR_GITHUB_USERNAME/terraform-gcp-logging-module.git"
+  source              = "telia-oss/gke-logsink-module"
   source_project      = "your-source-project-id"
   destination_project = "your-destination-project-id"
   cluster_name        = "your-cluster-name"
