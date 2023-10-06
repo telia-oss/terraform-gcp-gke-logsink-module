@@ -1,12 +1,14 @@
-
-output "created_bucket_id" {
-  value = module.gcp_logging.bucket_id
+output "logging_sink_names" {
+  description = "Sink names from the logging module."
+  value       = module.gcp_logsink.sink_names
 }
 
-output "created_sink_name" {
-  value = module.gcp_logging.sink_name
+output "logging_sink_writer_identities" {
+  description = "Writer identities for the logging sinks from the module."
+  value       = module.gcp_logsink.sink_writer_identities
 }
 
-output "sink_writer_identity" {
-  value = module.gcp_logging.writer_identity
+output "logging_buckets" {
+  description = "Bucket IDs from the logging module."
+  value       = module.gcp_logsink.buckets
 }
