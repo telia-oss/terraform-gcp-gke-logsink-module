@@ -1,14 +1,14 @@
-output "bucket_id" {
-  description = "The ID of the created logging bucket."
-  value       = google_logging_project_bucket_config.bucket.bucket_id
+output "sink_writer_identities" {
+  description = "The writer identities for each logging sink."
+  value       = { for key in toset(local.clusters_key) : key => google_logging_project_sink.sink-bucket[key].writer_identity }
 }
 
-output "sink_name" {
-  description = "The name of the created logging sink."
-  value       = google_logging_project_sink.sink-bucket.name
+output "buckets" {
+  description = "The bucket IDs created for each cluster or all clusters."
+  value       = { for key in toset(local.clusters_key) : key => google_logging_project_bucket_config.bucket[key].bucket_id }
 }
 
-output "writer_identity" {
-  description = "The writer identity of the created logging sink."
-  value       = google_logging_project_sink.sink-bucket.writer_identity
+output "sink_names" {
+  description = "The names of the logging sinks created."
+  value       = { for key in toset(local.clusters_key) : key => google_logging_project_sink.sink-bucket[key].name }
 }

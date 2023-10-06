@@ -9,7 +9,7 @@ module "gcp_logging" {
   source              = "telia-oss/gke-logsink-module"
   source_project      = "your-source-project-id"
   destination_project = "your-destination-project-id"
-  cluster_name        = "your-cluster-name"
+  cluster_name        = ["your-cluster-name"]
 }
 ```
 
@@ -26,10 +26,12 @@ Replace `YOUR_GITHUB_USERNAME` with your actual GitHub username and the reposito
 
 | Name                | Description                          | Type   | Default | Required |
 |---------------------|--------------------------------------|--------|---------|:--------:|
-| `source_project`    | The ID of the source GCP project.    | string | n/a     | yes      |
-| `destination_project` | The ID of the destination GCP project where logs will be stored. | string | n/a | yes |
-| `cluster_name`      | The name of the GKE or Anthos cluster.  | string | n/a     | yes      |
-| `log_filter_custom`      | The custom log filter.  | string | n/a    | no      |
+| `source_project`     | The ID of the source GCP project.    | string | n/a     | yes      |
+| `destination_project`| The ID of the destination GCP project where logs will be stored. | string | n/a | yes |
+| `cluster_name`       | The name of the GKE or Anthos cluster.  | list(string) | n/a     | yes      |
+| `custom_log_filter`  | The custom log filter.  | string | n/a    | no      |
+| `retention_days`  | Log retention on the destination bucket.  | number | 90    | no      |
+| `multiple_clusters_per_sink`  | Option to use one sink for multiple cluster.  | bool | false    | no      |
 
 ### Custom Log Filter
 
@@ -39,7 +41,7 @@ While the module is designed to provide a default logging filter for GKE or Anth
 
 To utilize the custom filter option:
 
-1. **Specify the `log_filter_custom` variable** when using the module:
+1. **Specify the `custom_log_filter` variable** when using the module:
 
 ```hcl
 module "gcp_logging" {
@@ -47,11 +49,11 @@ module "gcp_logging" {
   source_project      = "your-source-project-id"
   destination_project = "your-destination-project-id"
   cluster_name        = "your-cluster-name"
-  log_filter_custom   = "YOUR_CUSTOM_FILTER_STRING"
+  custom_log_filter   = "YOUR_CUSTOM_FILTER_STRING"
 }
 ```
 
-If you do not provide a value for `log_filter_custom`, the module will use the default filter pattern based on your `source_project` and `cluster_name`.
+If you do not provide a value for `custom_log_filter`, the module will use the default filter pattern based on your `source_project` and `cluster_name`.
 
 2. **Custom Filter Format**:
 
