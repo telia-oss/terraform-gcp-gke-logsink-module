@@ -13,8 +13,6 @@ module "gcp_logging" {
 }
 ```
 
-Replace `YOUR_GITHUB_USERNAME` with your actual GitHub username and the repository URL if different.
-
 ## Requirements
 
 - Terraform v0.14 or newer
